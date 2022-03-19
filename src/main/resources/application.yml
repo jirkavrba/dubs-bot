@@ -4,3 +4,7 @@ spring:
     username: ${DATABASE_USERNAME:dubs}
     password: ${DATABASE_PASSWORD:dubs}
     driver-class-name: org.postgresql.Driver
+
+discord:
+  token: ${DISCORD_TOKEN}
+  development-guild-id: 932728712355512331
