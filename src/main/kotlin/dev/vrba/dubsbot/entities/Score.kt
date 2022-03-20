@@ -4,10 +4,13 @@ import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 import java.util.UUID
 
 @Entity
-@Table(name = "scores")
+@Table(name = "scores", uniqueConstraints = [
+    UniqueConstraint(name = "UK_user_guild", columnNames = ["user_id", "guild_id"])
+])
 data class Score(
     @Id
     val id: UUID = UUID.randomUUID(),
