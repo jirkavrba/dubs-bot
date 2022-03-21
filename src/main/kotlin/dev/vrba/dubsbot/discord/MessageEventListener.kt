@@ -1,14 +1,13 @@
 package dev.vrba.dubsbot.discord
 
 import dev.vrba.dubsbot.entities.Score
-import dev.vrba.dubsbot.repositories.ScoresRepository
-import net.dv8tion.jda.api.entities.Emoji
+import dev.vrba.dubsbot.repositories.ScoreRepository
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import org.springframework.stereotype.Component
 
 @Component
-class MessageEventListener(private val repository: ScoresRepository) : ListenerAdapter() {
+class MessageEventListener(private val repository: ScoreRepository) : ListenerAdapter() {
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
         val number = checkEm(event.messageId)

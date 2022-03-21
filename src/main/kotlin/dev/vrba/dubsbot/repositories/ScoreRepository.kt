@@ -2,13 +2,12 @@ package dev.vrba.dubsbot.repositories
 
 import dev.vrba.dubsbot.entities.Score
 import org.springframework.data.domain.Sort
-import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface ScoresRepository : CrudRepository<Score, UUID> {
+interface ScoreRepository : CrudRepository<Score, UUID> {
 
     fun findByUserIdAndGuildId(userId: Long, guildId: Long): Score?
 

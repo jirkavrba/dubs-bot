@@ -1,6 +1,6 @@
 package dev.vrba.dubsbot.discord.commands
 
-import dev.vrba.dubsbot.repositories.ScoresRepository
+import dev.vrba.dubsbot.repositories.ScoreRepository
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.Commands
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class LeaderboardCommand(private val repository: ScoresRepository) : SlashCommand {
+class LeaderboardCommand(private val repository: ScoreRepository) : SlashCommand {
 
     override fun define(): SlashCommandData = Commands.slash("leaderboard", "Display the dubs bot leaderboard for this guild")
 
