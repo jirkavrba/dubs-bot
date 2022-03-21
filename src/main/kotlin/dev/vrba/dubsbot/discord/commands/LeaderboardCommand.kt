@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Component
 import java.time.Instant
 
@@ -20,10 +21,11 @@ class LeaderboardCommand(private val repository: ScoresRepository) : SlashComman
                 .editOriginal("Sorry, this command is meant to be used in guilds only.")
                 .queue()
 
-        val leaderboard = repository.guildLeaderboard(guild)
+        val sort = Sort.by(Sort.Direction.DESC, "pents", "quads", "trips", "dubs")
+        val leaderboard = repository.findByGuildId(guild, sort)
             .take(10)
             .mapIndexed { i, it ->
-                "**${i + 1}**. <@${it.userId}> - **${it.pents}** pents, **${it.quads}** quads, **${it.trips}** trips and **${it.quads}** dubs"
+                "**${i + 1}**. <@${it.userId}> - **${it.pents}** pents, **${it.quads}** quads, **${it.trips}** trips and **${it.dubs}** dubs"
             }
 
         val embed = EmbedBuilder()
