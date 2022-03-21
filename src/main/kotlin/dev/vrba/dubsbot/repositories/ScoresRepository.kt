@@ -16,5 +16,4 @@ interface ScoresRepository : CrudRepository<Score, UUID> {
        order by pents desc, quads desc, trips desc, dubs desc
     """)
     fun guildLeaderboard(guildId: Long): List<Score>
-
 }

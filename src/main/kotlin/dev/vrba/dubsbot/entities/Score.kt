@@ -22,7 +22,7 @@ data class Score(
     val guildId: Long,
 
     @Column(name = "dubs", nullable = false)
-    val dubs: Int  = 0,
+    val dubs: Int = 0,
 
     @Column(name = "trips", nullable = false)
     val trips: Int = 0,
@@ -32,4 +32,6 @@ data class Score(
 
     @Column(name = "pents", nullable = false)
     val pents: Int = 0
-)
+) {
+    constructor() : this(UUID.randomUUID(), 0, 0)
+}
