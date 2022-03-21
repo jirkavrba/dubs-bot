@@ -23,7 +23,7 @@ class LeaderboardCommand(private val repository: ScoresRepository) : SlashComman
         val leaderboard = repository.guildLeaderboard(guild)
             .take(10)
             .mapIndexed { i, it ->
-                "**${i + 1}**. <@${it.userId}> - **${it.pents}** pents, **${it.quads}** quads, **${it.trips}** trips and ${it.quads} quads"
+                "**${i + 1}**. <@${it.userId}> - **${it.pents}** pents, **${it.quads}** quads, **${it.trips}** trips and **${it.quads}** dubs"
             }
 
         val embed = EmbedBuilder()
