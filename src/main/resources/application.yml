@@ -5,6 +5,11 @@ spring:
     password: ${DATABASE_PASSWORD:dubs}
     driver-class-name: org.postgresql.Driver
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
 discord:
   token: ${DISCORD_TOKEN}
   development-guild-id: 932728712355512331

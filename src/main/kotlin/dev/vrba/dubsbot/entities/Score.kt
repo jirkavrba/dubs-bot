@@ -21,8 +21,15 @@ data class Score(
     @Column(name = "guild_id", nullable = false)
     val guildId: Long,
 
+    @Column(name = "dubs", nullable = false)
     val dubs: Int  = 0,
+
+    @Column(name = "trips", nullable = false)
     val trips: Int = 0,
+
+    @Column(name = "quads", nullable = false)
     val quads: Int = 0,
+
+    @Column(name = "pents", nullable = false)
     val pents: Int = 0
 )
