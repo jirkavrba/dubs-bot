@@ -1,0 +1,11 @@
+stages:
+  - build
+
+build:
+  image: gradle:7.4.1-jdk17-alpine
+  stage: build
+  script:
+    - ./gradlew boorJar
+  artifacts:
+    paths:
+      - build/libs/*.jar
