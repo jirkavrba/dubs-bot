@@ -42,9 +42,9 @@ class MessageEventListener(private val repository: ScoreRepository) : ListenerAd
         val score = repository.findByUserIdAndGuildId(user, guild) ?: Score(userId = user, guildId = guild)
         val updated = when (number) {
             2 -> score.copy(dubs = score.dubs + 1)
-            3 -> score.copy(dubs = score.trips + 1)
-            4 -> score.copy(dubs = score.quads + 1)
-            5 -> score.copy(dubs = score.pents + 1)
+            3 -> score.copy(trips = score.trips + 1)
+            4 -> score.copy(quads = score.quads + 1)
+            5 -> score.copy(pents = score.pents + 1)
             else -> score
         }
 
