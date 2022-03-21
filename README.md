@@ -31,5 +31,5 @@ I guess that's it. You can fork the code, host it yourself, do whatever you want
 It's licensed under the MIT licence, so I don't give a shit.
 
 If you have an idea you would like to add to the bot, you can either:
-- fork the bot, learn C# (optional), make changes to the bot and open a pull request,
+- fork the bot, learn Kotlin (optional), make changes to the bot and open a pull request,
 - or [create a new issue](https://github.com/jirkavrba/dubs-bot/issues/new) and I will make it for you! (or, you know, close it...)
