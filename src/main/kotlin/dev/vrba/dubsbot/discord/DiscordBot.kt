@@ -1,10 +1,11 @@
 package dev.vrba.dubsbot.discord
 
 import dev.vrba.dubsbot.configuration.DiscordConfiguration
-import dev.vrba.dubsbot.discord.commands.SlashCommand
+import dev.vrba.dubsbot.discord.commands.ApplicationCommand
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
+import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.EventListener
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -18,7 +19,7 @@ class DiscordBot(
     private val configuration: DiscordConfiguration,
     private val environment: Environment,
     private val listeners: List<EventListener>,
-    private val commands: List<SlashCommand>
+    private val commands: List<ApplicationCommand>
 ) : CommandLineRunner {
 
     private val client: JDA = JDABuilder.createDefault(configuration.token)
@@ -39,7 +40,7 @@ class DiscordBot(
 
     private fun registerSlashCommands() {
         val handler = object : ListenerAdapter() {
-            override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
+            override fun onGenericCommandInteraction(event: GenericCommandInteractionEvent) {
                 // TODO: Add exception handling
                 commands.firstOrNull { it.define().name == event.name }?.handle(event)
             }
