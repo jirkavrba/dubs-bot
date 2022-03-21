@@ -13,9 +13,10 @@ class AboutCommand : SlashCommand {
     override fun define(): SlashCommandData = Commands.slash("about", "Provides information about the bot")
 
     override fun handle(event: SlashCommandInteractionEvent) {
+        val repository = "https://gitlab.com/jirkavrba/dubs-bot"
         val embed = EmbedBuilder()
             .setColor(0x57F287)
-            .setTitle("Dubs bot", "https://github.com/jirkavrba/dubs-bot")
+            .setTitle("Dubs bot", repository)
             .setDescription(
                 """
                 **A bot for detecting accidental dubs/trips/quads among your Discord messages**
@@ -48,7 +49,7 @@ class AboutCommand : SlashCommand {
 
 
         event.replyEmbeds(embed)
-            .addActionRow(Button.link("https://github.com/jirkavrba/dubs-bot", "\uD83D\uDCDC Source code"))
+            .addActionRow(Button.link(repository, "\uD83D\uDCDC Source code"))
             .queue()
     }
 }
