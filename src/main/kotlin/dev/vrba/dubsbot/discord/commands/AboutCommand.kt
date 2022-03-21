@@ -14,6 +14,7 @@ class AboutCommand : SlashCommand {
 
     override fun handle(event: SlashCommandInteractionEvent) {
         val embed = EmbedBuilder()
+            .setColor(0x57F287)
             .setTitle("Dubs bot", "https://github.com/jirkavrba/dubs-bot")
             .setDescription(
                 """
@@ -47,7 +48,7 @@ class AboutCommand : SlashCommand {
 
 
         event.replyEmbeds(embed)
-            .addActionRow(Button.link("https://github.com/jirkavrba/dubs-bot", "Github repository"))
+            .addActionRow(Button.link("https://github.com/jirkavrba/dubs-bot", "\uD83D\uDCDC Source code"))
             .queue()
     }
 }

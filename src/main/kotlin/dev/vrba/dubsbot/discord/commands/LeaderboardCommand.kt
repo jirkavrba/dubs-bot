@@ -29,12 +29,11 @@ class LeaderboardCommand(private val repository: ScoreRepository) : SlashCommand
             }
 
         val embed = EmbedBuilder()
-            .setColor(0x99ff99)
+            .setColor(0x57F287)
             .setTitle("Dubs bot leaderboard for this guild")
             .setDescription(leaderboard.joinToString("\n"))
             .setTimestamp(Instant.now())
             .build()
-
 
         interaction.editOriginalEmbeds(embed)
             .setContent("")
