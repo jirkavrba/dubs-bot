@@ -1,9 +1,9 @@
 package dev.vrba.dubsbot.discord
 
 import dev.vrba.dubsbot.configuration.DiscordConfiguration
+import dev.vrba.dubsbot.discord.commands.SlashCommand
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
-import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.EventListener
