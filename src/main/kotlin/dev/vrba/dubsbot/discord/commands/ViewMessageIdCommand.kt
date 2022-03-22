@@ -25,7 +25,7 @@ class ViewMessageIdCommand : ApplicationCommand {
 
         if (containsDubs) {
             val split = id.length - number
-            val description = id.substring(0..(split - 1)) + "**" + id.substring(split) + "**"
+            val description = id.substring(0 until split) + "**" + id.substring(split) + "**"
             val embed = EmbedBuilder()
                 .setColor(0x57F287)
                 .setTitle("Check 'em!")
