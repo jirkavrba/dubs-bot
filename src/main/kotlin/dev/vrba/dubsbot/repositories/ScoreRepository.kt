@@ -8,8 +8,7 @@ import java.util.UUID
 
 @Repository
 interface ScoreRepository : CrudRepository<Score, UUID> {
-
     fun findByUserIdAndGuildId(userId: Long, guildId: Long): Score?
-
     fun findByGuildId(guildId: Long, sort: Sort): List<Score>
+
 }

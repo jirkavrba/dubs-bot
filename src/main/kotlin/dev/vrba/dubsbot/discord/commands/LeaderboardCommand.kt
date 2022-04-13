@@ -1,5 +1,6 @@
 package dev.vrba.dubsbot.discord.commands
 
+import dev.vrba.dubsbot.entities.Score
 import dev.vrba.dubsbot.repositories.ScoreRepository
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.interaction.command.GenericCommandInteractionEvent
@@ -22,12 +23,10 @@ class LeaderboardCommand(private val repository: ScoreRepository) : ApplicationC
                 .editOriginal("Sorry, this command is meant to be used in guilds only.")
                 .queue()
 
-        val sort = Sort.by(Sort.Direction.DESC, "pents", "quads", "trips", "dubs")
+        val sort = Sort.by(Sort.Direction.DESC, "decas", "nonas", "octas", "septs", "sextas", "pents", "quads", "trips", "dubs")
         val leaderboard = repository.findByGuildId(guild, sort)
             .take(10)
-            .mapIndexed { i, it ->
-                "**${i + 1}**. <@${it.userId}> - **${it.pents}** pents, **${it.quads}** quads, **${it.trips}** trips and **${it.dubs}** dubs"
-            }
+            .mapIndexed(this::formatScore)
 
         val embed = EmbedBuilder()
             .setColor(0x57F287)
@@ -39,5 +38,28 @@ class LeaderboardCommand(private val repository: ScoreRepository) : ApplicationC
         interaction.editOriginalEmbeds(embed)
             .setContent("")
             .queue()
+    }
+
+    private fun formatScore(index: Int, score: Score): String {
+        val header = "${index + 1}. <@${score.userId}>: "
+        val counts = listOf(
+            "decas" to score.decas,
+            "nonas" to score.nonas,
+            "octas" to score.octas,
+            "septs" to score.septs,
+            "sextas" to score.sextas,
+            "pents" to score.pents,
+            "quads" to score.quads,
+            "trips" to score.trips,
+            "dubs" to score.dubs
+        )
+        .filter { (_, score) -> score > 0 }
+        .joinToString(", ") { (label, score) -> "**$score** $label" }
+
+        if (counts.isEmpty()) {
+            return header + "_No dubs yet_ \uD83D\uDE22"
+        }
+
+        return header + counts
     }
 }
