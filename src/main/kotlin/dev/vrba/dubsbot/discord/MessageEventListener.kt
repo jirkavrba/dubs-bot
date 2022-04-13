@@ -16,10 +16,15 @@ class MessageEventListener(private val repository: ScoreRepository) : ListenerAd
             3 -> "3️⃣"
             4 -> "4️⃣"
             5 -> "5️⃣"
+            6 -> "6️⃣"
+            7 -> "7️⃣"
+            8 -> "8️⃣"
+            9 -> "9️⃣"
+            10 -> "\uD83D\uDD1F" // I fucking hate unicode <3
             else -> null
         }
 
-        val guild = event.guild?.idLong ?: return
+        val guild = event.guild.idLong
         val user = event.author.idLong
 
         emoji?.let {
@@ -45,6 +50,11 @@ class MessageEventListener(private val repository: ScoreRepository) : ListenerAd
             3 -> score.copy(trips = score.trips + 1)
             4 -> score.copy(quads = score.quads + 1)
             5 -> score.copy(pents = score.pents + 1)
+            6 -> score.copy(sextas = score.sextas + 1)
+            7 -> score.copy(septs = score.septs + 1)
+            8 -> score.copy(octas = score.octas + 1)
+            9 -> score.copy(nonas = score.nonas + 1)
+            10 -> score.copy(decas = score.decas + 1)
             else -> score
         }
 

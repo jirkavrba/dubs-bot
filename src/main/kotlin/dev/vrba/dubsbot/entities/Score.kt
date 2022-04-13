@@ -31,7 +31,22 @@ data class Score(
     val quads: Int = 0,
 
     @Column(name = "pents", nullable = false)
-    val pents: Int = 0
+    val pents: Int = 0,
+
+    @Column(name = "sextas", nullable = false)
+    val sextas: Int = 0,
+
+    @Column(name = "septs", nullable = false)
+    val septs: Int = 0,
+
+    @Column(name = "octas", nullable = false)
+    val octas: Int = 0,
+
+    @Column(name = "nonas", nullable = false)
+    val nonas: Int = 0,
+
+    @Column(name = "decas", nullable = false)
+    val decas: Int = 0,
 ) {
     constructor() : this(UUID.randomUUID(), 0, 0)
 }
