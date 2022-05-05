@@ -30,6 +30,7 @@ class ViewMessageIdCommand : ApplicationCommand {
                 .setColor(0x57F287)
                 .setTitle("Check 'em!")
                 .setDescription(description)
+                .setThumbnail("https://i.imgur.com/I97OCa3.png")
                 .build()
 
             return event.replyEmbeds(embed).addActionRow(button).queue()
