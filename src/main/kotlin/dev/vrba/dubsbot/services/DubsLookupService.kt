@@ -15,10 +15,10 @@ class DubsLookupService {
         }
 
         return basic + setOfNotNull(
-                findConsMatch(message),
-                findOffByOneMatch(message),
-                findPalindromeMatch(message),
-                findPrimeMatch(message)
+            findConsMatch(message),
+            findOffByOneMatch(message),
+            findPalindromeMatch(message),
+            findPrimeMatch(message)
         )
     }
 

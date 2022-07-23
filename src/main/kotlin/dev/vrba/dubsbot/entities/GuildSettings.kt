@@ -7,12 +7,12 @@ import org.springframework.data.relational.core.mapping.Table
 
 @Table(name = "guild_settings")
 data class GuildSettings(
-        @Id
-        val id: Int,
+    @Id
+    val id: Int,
 
-        @Column("guild_id")
-        val guild: Long,
+    @Column("guild_id")
+    val guild: Long,
 
-        @Column("dubs_lookup_mode")
-        val mode: DubsLookupMode = DubsLookupMode.Basic
+    @Column("dubs_lookup_mode")
+    val mode: DubsLookupMode = DubsLookupMode.Basic
 )
