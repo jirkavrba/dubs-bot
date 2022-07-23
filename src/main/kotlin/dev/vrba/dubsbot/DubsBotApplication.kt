@@ -6,9 +6,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 import org.springframework.cache.annotation.EnableCaching
 
-@SpringBootApplication
 @EnableCaching
 @EnableConfigurationProperties(DiscordConfiguration::class)
+@SpringBootApplication
 class DubsBotApplication
 
 fun main(args: Array<String>) {

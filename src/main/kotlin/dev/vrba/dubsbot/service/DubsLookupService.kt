@@ -7,19 +7,16 @@ import java.math.BigInteger
 @Service
 class DubsLookupService {
 
-    fun findMatches(message: Long, mode: DubsLookupMode): Set<DubsMatch> {
+    fun findMatches(message: Long): Set<DubsMatch> {
         val basic = findBasicMatches(message)
-
-        if (mode == DubsLookupMode.Basic) {
-            return basic
-        }
-
-        return basic + setOfNotNull(
+        val extra = setOfNotNull(
             findConsMatch(message),
             findOffByOneMatch(message),
             findPalindromeMatch(message),
             findPrimeMatch(message)
         )
+
+        return basic + extra
     }
 
     private tailrec fun findBasicMatches(message: Long, matches: Set<DubsMatch> = emptySet()): Set<DubsMatch> {

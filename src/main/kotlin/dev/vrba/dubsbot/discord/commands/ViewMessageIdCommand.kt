@@ -1,8 +1,6 @@
 package dev.vrba.dubsbot.discord.commands
 
 import dev.vrba.dubsbot.domain.DubsMatch
-import dev.vrba.dubsbot.entity.GuildSettings
-import dev.vrba.dubsbot.repository.GuildSettingsRepository
 import dev.vrba.dubsbot.service.DubsLookupService
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.Guild
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Component
 @Component
 class ViewMessageIdCommand(
     private val service: DubsLookupService,
-    private val repository: GuildSettingsRepository
 ) : ApplicationCommand {
 
     override fun define(): CommandData = Commands.message("View message id")
@@ -25,11 +22,8 @@ class ViewMessageIdCommand(
     override fun handle(event: GenericCommandInteractionEvent) {
         if (event !is MessageContextInteractionEvent || !event.isFromGuild) return
 
-        val guild = (event.guild as Guild).idLong
-        val settings = repository.findByGuild(guild) ?: repository.save(GuildSettings(guild = guild))
-
         val message = event.target.idLong
-        val matches = service.findMatches(message, settings.mode)
+        val matches = service.findMatches(message)
 
         val embed = if (matches.isEmpty()) noMatchesEmbed(message) else matchesEmbed(message, matches)
         val button = Button.link(event.target.jumpUrl, "Message")

@@ -3,10 +3,8 @@ package dev.vrba.dubsbot.discord
 import com.vdurmont.emoji.EmojiParser
 import dev.vrba.dubsbot.domain.BasicMatch
 import dev.vrba.dubsbot.domain.DubsMatch
-import dev.vrba.dubsbot.entity.GuildSettings
 import dev.vrba.dubsbot.entity.GuildStats
 import dev.vrba.dubsbot.entity.UserScore
-import dev.vrba.dubsbot.repository.GuildSettingsRepository
 import dev.vrba.dubsbot.repository.GuildStatsRepository
 import dev.vrba.dubsbot.repository.UserScoreRepository
 import dev.vrba.dubsbot.service.DubsLookupService
@@ -14,12 +12,10 @@ import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import org.springframework.stereotype.Component
-import java.time.LocalDate
 
 @Component
 class MessagesEventListener(
     private val scoreRepository: UserScoreRepository,
-    private val settingsRepository: GuildSettingsRepository,
     private val statsRepository: GuildStatsRepository,
     private val service: DubsLookupService
 ) : ListenerAdapter() {
@@ -30,8 +26,7 @@ class MessagesEventListener(
         val guild = event.guild.idLong
         val user = event.author.idLong
 
-        val settings = settingsRepository.findByGuild(guild) ?: settingsRepository.save(GuildSettings(guild = guild))
-        val matches = service.findMatches(event.messageIdLong, settings.mode)
+        val matches = service.findMatches(event.messageIdLong)
         val stats = statsRepository.findByGuild(guild) ?: GuildStats(guild = guild)
 
         if (matches.isNotEmpty()) {
