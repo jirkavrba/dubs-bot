@@ -1,5 +1,6 @@
-package dev.vrba.dubsbot.domain
+package dev.vrba.dubsbot.entities
 
+import dev.vrba.dubsbot.domain.DubsLookupMode
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
