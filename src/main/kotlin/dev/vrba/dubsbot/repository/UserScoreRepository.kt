@@ -10,6 +10,4 @@ interface UserScoreRepository : CrudRepository<UserScore, Int> {
 
     fun findByUserAndGuild(user: Long, guild: Long): UserScore?
 
-    fun findByUserAndGuildAndDate(user: Long, guild: Long, date: LocalDate): UserScore?
-
 }

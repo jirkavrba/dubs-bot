@@ -39,3 +39,7 @@ create table user_scores
 alter table user_scores add constraint uk_user_scores_user_guild_date unique (user_id, guild_id, score_date);
 
 create index ix_user_scores on user_scores (user_id, guild_id, score_date);
+
+--changeset jirkavrba:remove-dates-from-user-scores-table
+alter table user_scores drop column score_date;
+create index ix_user_scores on user_scores (user_id, guild_id);

@@ -35,10 +35,13 @@ class MessagesEventListener(
         val stats = statsRepository.findByGuild(guild) ?: GuildStats(guild = guild)
 
         if (matches.isNotEmpty()) {
-            val emoji = listOf(":four_leaf_clover:") + matches.map { it.emoji }
-            val unicode = emoji.map { EmojiParser.parseToUnicode(it) }
+            listOf(":four_leaf_clover:", *matches.map { it.emoji }.toTypedArray())
+                .map { EmojiParser.parseToUnicode(it) }
+                .map { Emoji.fromUnicode(it) }
+                .forEach {
+                    event.message.addReaction(it).queue()
+                }
 
-            unicode.forEach { event.message.addReaction(Emoji.fromUnicode(it)).queue() }
             updateScore(user, guild, matches)
         }
 
@@ -53,11 +56,10 @@ class MessagesEventListener(
     }
 
     private fun updateScore(user: Long, guild: Long, matches: Set<DubsMatch>) {
-        val score = scoreRepository.findByUserAndGuildAndDate(user, guild, LocalDate.now()) ?: scoreRepository.save(
+        val score = scoreRepository.findByUserAndGuild(user, guild) ?: scoreRepository.save(
             UserScore(
                 user = user,
                 guild = guild,
-                date = LocalDate.now()
             )
         )
 

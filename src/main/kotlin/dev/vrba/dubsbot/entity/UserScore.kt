@@ -16,9 +16,6 @@ data class UserScore(
     @Column("guild_id")
     val guild: Long,
 
-    @Column("score_date")
-    val date: LocalDate,
-
     @Column("digits_score")
     val digits: IntArray = IntArray(20) { 0 },
 
