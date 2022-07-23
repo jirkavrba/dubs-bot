@@ -2,6 +2,7 @@ package dev.vrba.dubsbot.services
 
 import dev.vrba.dubsbot.domain.*
 import org.springframework.stereotype.Service
+import java.math.BigInteger
 
 @Service
 class DubsLookupService {
@@ -66,6 +67,8 @@ class DubsLookupService {
     }
 
     private fun findPrimeMatch(message: Long): PrimeMatch? {
-        return null
+        // https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+        val prime = BigInteger.valueOf(message).isProbablePrime(512)
+        return if (prime) PrimeMatch else null
     }
 }
