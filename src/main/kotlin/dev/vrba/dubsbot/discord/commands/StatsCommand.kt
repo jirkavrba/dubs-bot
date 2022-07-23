@@ -33,5 +33,4 @@ class StatsCommand(private val repository: GuildStatsRepository) : ApplicationCo
 
         interaction.editOriginalEmbeds(embed).complete()
     }
-
 }
