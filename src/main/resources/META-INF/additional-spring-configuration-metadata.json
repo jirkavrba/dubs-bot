@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "discord.token",
+      "type": "java.lang.String",
+      "description": "Token used for the Discord gateway authentication."
+    },
+    {
+      "name": "discord.development-guild-id",
+      "type": "java.lang.Long",
+      "description": "ID of the guild that the commands are registered to in development mode."
+    }
+  ]
+}

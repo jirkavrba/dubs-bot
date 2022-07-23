@@ -8,3 +8,7 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:/changelog.sql
+
+discord:
+  token: ${DISCORD_TOKEN}
+  development-guild-id: ${DISCORD_DEVELOPMENT_GUILD_ID:932728712355512331}
