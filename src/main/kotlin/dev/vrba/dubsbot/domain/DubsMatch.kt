@@ -25,7 +25,7 @@ class BasicMatch(val digits: Int) : DubsMatch(
         7 -> "septas"
         8 -> "octas"
         9 -> "nonas"
-        else -> "MOOORE!"
+        else -> "rigged digits"
     },
     { score -> score.copy(digits = score.digits.also { it[digits]++ }) }
 )
