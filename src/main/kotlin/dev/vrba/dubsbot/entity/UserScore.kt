@@ -1,6 +1,6 @@
 package dev.vrba.dubsbot.entity
 
-import dev.vrba.dubsbot.domain.BasicMatch
+import dev.vrba.dubsbot.domain.*
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
@@ -51,14 +51,14 @@ data class UserScore(
     }
 
     fun description(): String {
-        val digits = digits.mapIndexed { index, count -> if (count > 0) "**$count** " + BasicMatch(index).name else null }
+        val digits = digits.mapIndexed { index, count -> if (count > 0) "**$count×** " + BasicMatch(index).emoji else null }
         val extra = listOf(
-            if (cons > 0) "**$cons** cons" else null,
-            if (primes > 0) "**$primes** primes" else null,
-            if (offByOnes > 0) "**$offByOnes** off-by-ones" else null,
-            if (palindromes > 0) "**$palindromes** palindromes" else null,
+            if (cons > 0) "**$cons×** ${ConsMatch.emoji}" else null,
+            if (primes > 0) "**$primes×** ${PrimeMatch.emoji}" else null,
+            if (offByOnes > 0) "**$offByOnes×** ${OffByOneMatch.emoji}" else null,
+            if (palindromes > 0) "**$palindromes×*8 ${PalindromeMatch.emoji}" else null,
         )
 
-        return "<@${user}>: " + (digits + extra).filterNotNull().joinToString(", ")
+        return "<@${user}>: " + (digits + extra).filterNotNull().joinToString(" ")
     }
 }
