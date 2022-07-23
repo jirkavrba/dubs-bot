@@ -1,6 +1,7 @@
 package dev.vrba.dubsbot.services
 
 import dev.vrba.dubsbot.domain.BasicMatch
+import dev.vrba.dubsbot.domain.ConsMatch
 import dev.vrba.dubsbot.domain.DubsLookupMode
 import dev.vrba.dubsbot.domain.PrimeMatch
 import org.junit.jupiter.api.Test
@@ -48,6 +49,17 @@ class DubsLookupServiceTests {
                     it.filterIsInstance<BasicMatch>().size == 2 &&
                     it.filterIsInstance<BasicMatch>().filter { match -> match.digits == 5 }.size == 2
         })
+    }
+
+    @Test
+    fun `test cons matches lookup`() {
+        assertTrue(service.findMatches(4346075798888800012, DubsLookupMode.Extended).none { it is ConsMatch })
+        assertTrue(service.findMatches(4346075798888804312, DubsLookupMode.Extended).none { it is ConsMatch })
+        assertTrue(service.findMatches(4346075798888809012, DubsLookupMode.Extended).none { it is ConsMatch })
+        assertTrue(service.findMatches(4346075798888809876, DubsLookupMode.Extended).any { it is ConsMatch })
+        assertTrue(service.findMatches(4346075798888806543, DubsLookupMode.Extended).any { it is ConsMatch })
+        assertTrue(service.findMatches(4346075798888801234, DubsLookupMode.Extended).any { it is ConsMatch })
+        assertTrue(service.findMatches(4346075798888806789, DubsLookupMode.Extended).any { it is ConsMatch })
     }
 
 

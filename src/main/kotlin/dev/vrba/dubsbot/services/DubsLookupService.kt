@@ -36,7 +36,10 @@ class DubsLookupService {
     }
 
     private fun findConsMatch(message: Long): ConsMatch? {
-        return null
+        val id = message.toString()
+        val cons = "0123456789".windowed(4).any { id.endsWith(it) || id.endsWith(it.reversed()) }
+
+        return if(cons) ConsMatch else null
     }
 
     private fun findOffByOneMatch(message: Long): OffByOneMatch? {
