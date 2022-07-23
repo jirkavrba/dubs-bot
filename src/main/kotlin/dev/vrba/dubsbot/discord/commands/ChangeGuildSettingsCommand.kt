@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component
 class ChangeGuildSettingsCommand(private val repository: GuildSettingsRepository) : ApplicationCommand {
 
     override fun define(): CommandData = Commands
-        .slash("change-guild-settings", "Change guild settings")
+        .slash("guild-settings", "Change guild settings")
         .addOption(OptionType.BOOLEAN, "extended-mode", "Use the extended lookup mode?", false)
 
     override fun handle(event: GenericCommandInteractionEvent) {
@@ -27,7 +27,6 @@ class ChangeGuildSettingsCommand(private val repository: GuildSettingsRepository
         val guild = event.guild?.idLong ?: return
         val extended = event.getOption("extended-mode")?.asBoolean ?: false
         val settings = repository.findByGuild(guild) ?: GuildSettings(guild = guild)
-
 
         repository.save(settings.copy(mode = if (extended) DubsLookupMode.Extended else DubsLookupMode.Basic))
 

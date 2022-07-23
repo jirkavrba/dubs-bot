@@ -42,8 +42,6 @@ class MessagesEventListener(
             updateScore(user, guild, matches)
         }
 
-        println(settings.mode)
-
         // Update guild stats
         statsRepository.save(
             stats.copy(
