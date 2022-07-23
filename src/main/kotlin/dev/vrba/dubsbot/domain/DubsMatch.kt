@@ -1,6 +1,8 @@
 package dev.vrba.dubsbot.domain
 
-sealed class DubsMatch(val emoji: String, val name: String)
+import dev.vrba.dubsbot.entity.UserScore
+
+sealed class DubsMatch(val emoji: String, val name: String, val apply: (UserScore) -> UserScore)
 
 class BasicMatch(val digits: Int) : DubsMatch(
     when (digits) {
@@ -24,10 +26,11 @@ class BasicMatch(val digits: Int) : DubsMatch(
         8 -> "octas"
         9 -> "nonas"
         else -> "MOOORE!"
-    }
+    },
+    { score -> score.copy(digits = score.digits.also { it[digits]++ }) }
 )
 
-object ConsMatch : DubsMatch(":1234:", "Cons")
-object OffByOneMatch : DubsMatch(":clown:", "Offbyone Kenobi")
-object PalindromeMatch : DubsMatch(":left_right_arrow:", "Palindrome")
-object PrimeMatch : DubsMatch(":nerd:", "Prime")
+object ConsMatch : DubsMatch(":1234:", "Cons", { score -> score.copy(cons = score.cons + 1) })
+object OffByOneMatch : DubsMatch(":clown:", "Offbyone Kenobi", { score -> score.copy(offByOnes = score.offByOnes + 1) })
+object PalindromeMatch : DubsMatch(":left_right_arrow:", "Palindrome", { score -> score.copy(palindromes = score.palindromes + 1) })
+object PrimeMatch : DubsMatch(":nerd:", "Prime", { score -> score.copy(primes = score.primes + 1) })
