@@ -1,9 +1,11 @@
 package dev.vrba.dubsbot.entity
 
+import dev.vrba.dubsbot.domain.BasicMatch
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDate
+import kotlin.math.pow
 
 @Table("user_scores")
 data class UserScore(
@@ -40,5 +42,23 @@ data class UserScore(
 
     override fun hashCode(): Int {
         return id
+    }
+
+    fun total(): Int {
+        return digits.mapIndexed { index, count -> count * (10.0).pow(index) } // 10 dubs = 1 trip
+            .sum()
+            .toInt()
+    }
+
+    fun description(): String {
+        val digits = digits.mapIndexed { index, count -> if (count > 0) "**$count** " + BasicMatch(index).name else null }
+        val extra = listOf(
+            if (cons > 0) "**$cons** cons" else null,
+            if (primes > 0) "**$primes** primes" else null,
+            if (offByOnes > 0) "**$offByOnes** off-by-ones" else null,
+            if (palindromes > 0) "**$palindromes** palindromes" else null,
+        )
+
+        return "<@${user}>: " + (digits + extra).filterNotNull().joinToString(", ")
     }
 }
