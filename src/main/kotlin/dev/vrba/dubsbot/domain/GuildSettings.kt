@@ -13,5 +13,5 @@ data class GuildSettings(
         val guild: Long,
 
         @Column("dubs_lookup_mode")
-        val mode: DubsLookupMode
+        val mode: DubsLookupMode = DubsLookupMode.Basic
 )
