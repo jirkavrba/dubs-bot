@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: dubs
+      POSTGRES_USER: dubs
+      POSTGRES_PASSWORD: dubs
+
+  bot:
+    image: jirkavrba/dubs-bot
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: jdbc:postgresql://db/dubs
+      DATABASE_USERNAME: dubs
+      DATABASE_PASSWORD: dubs
+      DISCORD_TOKEN: ${DISCORD_TOKEN} # Configure this in the .env file
