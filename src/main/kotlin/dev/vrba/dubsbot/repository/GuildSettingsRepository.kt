@@ -12,6 +12,6 @@ interface GuildSettingsRepository : CrudRepository<GuildSettings, Int> {
     @Cacheable("guilds")
     fun findByGuild(guild: Long): GuildSettings?
 
-    @CacheEvict("guilds")
+    @CacheEvict("guilds", allEntries = true)
     override fun <S : GuildSettings> save(entity: S): S
 }

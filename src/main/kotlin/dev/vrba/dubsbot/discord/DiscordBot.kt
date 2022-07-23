@@ -2,6 +2,7 @@ package dev.vrba.dubsbot.discord
 
 import dev.vrba.dubsbot.configuration.DiscordConfiguration
 import dev.vrba.dubsbot.discord.commands.ApplicationCommand
+import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.entities.Activity
@@ -34,7 +35,19 @@ class DiscordBot(
         val definitions = commands.map { it.define() }
         val handler = object : ListenerAdapter() {
             override fun onGenericCommandInteraction(event: GenericCommandInteractionEvent) {
-                commands.firstOrNull { it.define().name == event.name }?.handle(event)
+                try {
+                    commands.firstOrNull { it.define().name == event.name }?.handle(event)
+                }
+                catch (exception: Exception) {
+                    exception.printStackTrace()
+                    event.replyEmbeds(
+                        EmbedBuilder()
+                            .setColor(0xED4245)
+                            .setTitle("There was an error")
+                            .setDescription("```${exception.message}```")
+                            .build()
+                    )
+                }
             }
         }
 

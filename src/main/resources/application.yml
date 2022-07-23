@@ -11,7 +11,7 @@ spring:
 
 logging:
   level:
-    org.springframework.data: TRACE
+    org.springframework.jdbc.core: DEBUG
 
 discord:
   token: ${DISCORD_TOKEN}
