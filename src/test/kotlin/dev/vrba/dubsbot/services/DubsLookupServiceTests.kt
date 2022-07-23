@@ -1,9 +1,6 @@
 package dev.vrba.dubsbot.services
 
-import dev.vrba.dubsbot.domain.BasicMatch
-import dev.vrba.dubsbot.domain.ConsMatch
-import dev.vrba.dubsbot.domain.DubsLookupMode
-import dev.vrba.dubsbot.domain.PrimeMatch
+import dev.vrba.dubsbot.domain.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 
@@ -62,6 +59,16 @@ class DubsLookupServiceTests {
         assertTrue(service.findMatches(4346075798888806789, DubsLookupMode.Extended).any { it is ConsMatch })
     }
 
+    @Test
+    fun `test off by one matches lookup`() {
+        assertTrue(service.findMatches(4346075798888806777, DubsLookupMode.Extended).none { it is OffByOneMatch })
+        assertTrue(service.findMatches(4346075798888806122, DubsLookupMode.Extended).none { it is OffByOneMatch })
+        assertTrue(service.findMatches(4346075798888811009, DubsLookupMode.Extended).none { it is OffByOneMatch })
+        assertTrue(service.findMatches(4346075798888811990, DubsLookupMode.Extended).none { it is OffByOneMatch })
+        assertTrue(service.findMatches(4346075798888806778, DubsLookupMode.Extended).any { it is OffByOneMatch })
+        assertTrue(service.findMatches(4346075798888806887, DubsLookupMode.Extended).any { it is OffByOneMatch })
+        assertTrue(service.findMatches(4346075798888811112, DubsLookupMode.Extended).any { it is OffByOneMatch })
+    }
 
     @Test
     fun `test prime matches lookup`() {

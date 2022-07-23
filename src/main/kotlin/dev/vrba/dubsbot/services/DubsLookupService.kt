@@ -39,11 +39,20 @@ class DubsLookupService {
         val id = message.toString()
         val cons = "0123456789".windowed(4).any { id.endsWith(it) || id.endsWith(it.reversed()) }
 
-        return if(cons) ConsMatch else null
+        return if (cons) ConsMatch else null
     }
 
+    // Missing trips or better by just one (offbyone kenobi)
     private fun findOffByOneMatch(message: Long): OffByOneMatch? {
-        return null
+        val reversed = message.toString().reversed()
+
+        val first = reversed[0].digitToInt()
+        val matching = listOf(-1, 1).map { first + it }
+        val previous = reversed.drop(1).take(2)
+
+        val offByOne = previous[0] == previous[1] && previous[0].digitToInt() in matching
+
+        return if (offByOne) OffByOneMatch else null
     }
 
     private fun findPalindromeMatch(message: Long): PalindromeMatch? {
