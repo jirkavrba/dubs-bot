@@ -32,5 +32,5 @@ class BasicMatch(val digits: Int) : DubsMatch(
 
 object ConsMatch : DubsMatch(":1234:", "Cons", { score -> score.copy(cons = score.cons + 1) })
 object OffByOneMatch : DubsMatch(":clown:", "Offbyone Kenobi", { score -> score.copy(offByOnes = score.offByOnes + 1) })
-object PalindromeMatch : DubsMatch(":left_right_arrow:", "Palindrome", { score -> score.copy(palindromes = score.palindromes + 1) })
+object PalindromeMatch : DubsMatch(":skull:", "Palindrome", { score -> score.copy(palindromes = score.palindromes + 1) })
 object PrimeMatch : DubsMatch(":nerd:", "Prime", { score -> score.copy(primes = score.primes + 1) })
