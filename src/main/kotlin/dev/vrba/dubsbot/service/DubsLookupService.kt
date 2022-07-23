@@ -1,4 +1,4 @@
-package dev.vrba.dubsbot.services
+package dev.vrba.dubsbot.service
 
 import dev.vrba.dubsbot.domain.*
 import org.springframework.stereotype.Service

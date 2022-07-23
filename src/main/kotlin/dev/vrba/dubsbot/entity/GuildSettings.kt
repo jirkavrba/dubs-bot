@@ -1,4 +1,4 @@
-package dev.vrba.dubsbot.entities
+package dev.vrba.dubsbot.entity
 
 import dev.vrba.dubsbot.domain.DubsLookupMode
 import org.springframework.data.annotation.Id
@@ -8,7 +8,7 @@ import org.springframework.data.relational.core.mapping.Table
 @Table(name = "guild_settings")
 data class GuildSettings(
     @Id
-    val id: Int,
+    val id: Int = 0,
 
     @Column("guild_id")
     val guild: Long,
