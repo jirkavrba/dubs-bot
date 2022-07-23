@@ -71,6 +71,18 @@ class DubsLookupServiceTests {
     }
 
     @Test
+    fun `test palindrome matches lookup`() {
+        assertTrue(service.findMatches(1234566778776654311, DubsLookupMode.Extended).none { it is PalindromeMatch })
+        assertTrue(service.findMatches(1234566778776654322, DubsLookupMode.Extended).none { it is PalindromeMatch })
+        assertTrue(service.findMatches(1234566738776654333, DubsLookupMode.Extended).none { it is PalindromeMatch })
+        assertTrue(service.findMatches(1234566778876654321, DubsLookupMode.Extended).none { it is PalindromeMatch })
+        assertTrue(service.findMatches(1234566778776654321, DubsLookupMode.Extended).any { it is PalindromeMatch })
+        assertTrue(service.findMatches(1111111111111111111, DubsLookupMode.Extended).any { it is PalindromeMatch })
+        assertTrue(service.findMatches(1100110010100110011, DubsLookupMode.Extended).any { it is PalindromeMatch })
+        assertTrue(service.findMatches(1234561234321654321, DubsLookupMode.Extended).any { it is PalindromeMatch })
+    }
+
+    @Test
     fun `test prime matches lookup`() {
         assertTrue(service.findMatches(4346075790683833919, DubsLookupMode.Extended)
                 .filterIsInstance<PrimeMatch>()
@@ -81,5 +93,7 @@ class DubsLookupServiceTests {
                 .filterIsInstance<PrimeMatch>()
                 .isEmpty()
         )
+
+        // TODO: Add more prime test (I won't lol)
     }
 }

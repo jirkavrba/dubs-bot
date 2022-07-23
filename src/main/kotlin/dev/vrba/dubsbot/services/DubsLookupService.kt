@@ -29,7 +29,10 @@ class DubsLookupService {
         val first = reversed.first()
         val digits = reversed.takeWhile { it == first }.length
 
-        val remaining = reversed.drop(digits).reversed().toLong()
+        val remaining = reversed.drop(digits).reversed().let {
+            if (it.isEmpty()) 0
+            else it.toLong()
+        }
 
         return if (digits < 2) matches
         else findBasicMatches(remaining, matches + BasicMatch(digits))
@@ -56,7 +59,10 @@ class DubsLookupService {
     }
 
     private fun findPalindromeMatch(message: Long): PalindromeMatch? {
-        return null
+        val id = message.toString()
+        val palindrome = id == id.reversed()
+
+        return if (palindrome) PalindromeMatch else null
     }
 
     private fun findPrimeMatch(message: Long): PrimeMatch? {
