@@ -58,6 +58,6 @@ data class UserScore(
             if (palindromes > 0) "**$palindromes×*8 ${PalindromeMatch.emoji}" else null,
         )
 
-        return "<@${user}>: " + (digits + extra).filterNotNull().joinToString(" ")
+        return "<@${user}>: " + (digits.reversed() + extra).filterNotNull().joinToString(" ")
     }
 }
