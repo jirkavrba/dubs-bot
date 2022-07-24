@@ -8,6 +8,7 @@ import dev.vrba.dubsbot.entity.UserScore
 import dev.vrba.dubsbot.repository.GuildStatsRepository
 import dev.vrba.dubsbot.repository.UserScoreRepository
 import dev.vrba.dubsbot.service.DubsLookupService
+import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -38,6 +39,17 @@ class MessagesEventListener(
                 }
 
             updateScore(user, guild, matches)
+        }
+
+        // Reply with image to epic digits
+        if (matches.any { it is BasicMatch && it.digits >= 4 }) {
+            event.message.replyEmbeds(
+                EmbedBuilder()
+                    .setTitle("Woah, that are some pog digits!")
+                    .setDescription("**${event.messageIdLong}**")
+                    .setImage("https://gallery.lajtkep.dev/api/files/getRandomFile.php?tag=DOUBLES&seed=" + event.messageIdLong)
+                    .build()
+            ).queue()
         }
 
         // Update guild stats
