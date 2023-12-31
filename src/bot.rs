@@ -12,16 +12,18 @@ impl EventHandler for DubsBot {
         let matched_patterns = match_digit_patterns(&id);
 
         if !matched_patterns.is_empty() {
-            message.react(&context.http, '🍀')
-                .await
-                .expect("Error reacting to message.");
+            if let Err(reason) = message.react(&context.http, '🍀').await {
+                println!("Error adding the default reaction: {}",  reason);
+                return
+            }
 
             for matched_pattern in matched_patterns {
                 let reaction = Unicode(matched_pattern.emoji.to_string());
 
-                message.react(&context.http, reaction)
-                    .await
-                    .expect("Error reacting to message.");
+                if let Err(reason) = message.react(&context.http, reaction).await {
+                    println!("Error adding the {} reaction: {}", matched_pattern.emoji, reason);
+                    continue
+                }
             }
         }
     }

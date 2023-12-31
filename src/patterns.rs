@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+use ilog::IntLog;
 use is_prime::is_prime;
 
 pub struct DigitsPattern {
@@ -7,6 +9,7 @@ pub struct DigitsPattern {
 pub fn match_digit_patterns(id: &u64) -> Vec<DigitsPattern> {
     let matches = vec![
         match_repeating_digits(id),
+        match_fixed_suffixes(id),
         match_primes(id),
     ];
 
@@ -31,14 +34,6 @@ fn match_repeating_digits(id: &u64) -> Option<DigitsPattern> {
     };
 }
 
-fn match_primes(id: &u64) -> Option<DigitsPattern> {
-    if is_prime(format!("{}", id).as_str()) {
-        Some(DigitsPattern { emoji: "\u{1F913}" })
-    } else {
-        None
-    }
-}
-
 fn count_repeating_trailing_digits(number: &u64) -> u64 {
     let last_digit = number % 10;
     let mut remainder = number / 10;
@@ -50,4 +45,33 @@ fn count_repeating_trailing_digits(number: &u64) -> u64 {
     }
 
     return repeating_digits;
+}
+
+fn match_primes(id: &u64) -> Option<DigitsPattern> {
+    if is_prime(format!("{}", id).as_str()) {
+        Some(DigitsPattern { emoji: "\u{1F913}" })
+    } else {
+        None
+    }
+}
+
+fn match_fixed_suffixes(id: &u64) -> Option<DigitsPattern> {
+    let suffixes = HashMap::from([
+        (69, "\u{264B}"),
+        (420, "\u{1F525}"),
+        (777, "\u{1F3B0}"),
+        (911, "\u{2708}\u{FE0F}"),
+        (1984, "\u{1F441}\u{FE0F}")
+    ]);
+
+    return suffixes.iter()
+        .find(|(suffix, _)| ends_with(id, suffix))
+        .map(|(_, emoji)| DigitsPattern { emoji });
+}
+
+fn ends_with(number: &u64, suffix: &u64) -> bool {
+    let mask = suffix.log10() + 1;
+    let reduced = number % 10u64.pow(mask as u32);
+
+    return &reduced == suffix
 }
