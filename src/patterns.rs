@@ -1,10 +1,13 @@
+use is_prime::is_prime;
+
 pub struct DigitsPattern {
     pub emoji: &'static str,
 }
 
 pub fn match_digit_patterns(id: &u64) -> Vec<DigitsPattern> {
     let matches = vec![
-        match_repeating_digits(id)
+        match_repeating_digits(id),
+        match_primes(id),
     ];
 
     return matches.into_iter()
@@ -26,6 +29,14 @@ fn match_repeating_digits(id: &u64) -> Option<DigitsPattern> {
         9 => Some(DigitsPattern { emoji: "9\u{FE0F}\u{20E3}" }),
         _ => Some(DigitsPattern { emoji: "\u{267E}\u{FE0F}" }),
     };
+}
+
+fn match_primes(id: &u64) -> Option<DigitsPattern> {
+    if is_prime(format!("{}", id).as_str()) {
+        Some(DigitsPattern { emoji: "\u{1F913}" })
+    } else {
+        None
+    }
 }
 
 fn count_repeating_trailing_digits(number: &u64) -> u64 {
