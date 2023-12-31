@@ -1,0 +1,40 @@
+stages:
+  - build
+  - deploy
+
+.tagged-job:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ /^v\d+.\d+.\d+-?.*$/
+      when: always
+
+build-docker-image:
+  extends: .tagged-job
+  stage: build
+  image: docker:24.0.7
+  services:
+    - name: docker:24.0.7-dind
+      alias: docker
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login --username $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+deploy-docker-image:
+  extends: .tagged-job
+  stage: deploy
+  image: ubuntu
+  script:
+    - mkdir -p $CI_PROJECT_DIR/railway
+    - cd $CI_PROJECT_DIR/railway
+    - echo "FROM $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG" > ./Dockerfile
+    - apt-get update && apt-get install -y curl
+    - curl -fsSL https://railway.app/install.sh | sh
+    - railway up --service="dubs-bot" -d
+  needs:
+    - build-docker-image
