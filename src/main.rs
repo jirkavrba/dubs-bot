@@ -1,4 +1,5 @@
 mod bot;
+mod patterns;
 
 use std::env;
 use serenity::all::GatewayIntents;
