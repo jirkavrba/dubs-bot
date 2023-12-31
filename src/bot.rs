@@ -1,4 +1,5 @@
 use serenity::all::{Context, EventHandler, Message};
+use serenity::all::ReactionType::Unicode;
 use serenity::async_trait;
 use crate::patterns::match_digit_patterns;
 
@@ -11,10 +12,16 @@ impl EventHandler for DubsBot {
         let matched_patterns = match_digit_patterns(&id);
 
         if !matched_patterns.is_empty() {
-            message.react(&context.http, '🍀').await.expect("Error reacting to message.");
+            message.react(&context.http, '🍀')
+                .await
+                .expect("Error reacting to message.");
 
             for matched_pattern in matched_patterns {
-                message.react(&context.http, matched_pattern.emoji).await.expect("Error reacting to message.");
+                let reaction = Unicode(matched_pattern.emoji.to_string());
+
+                message.react(&context.http, reaction)
+                    .await
+                    .expect("Error reacting to message.");
             }
         }
     }
