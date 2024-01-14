@@ -68,10 +68,13 @@ fn match_primes(id: &u64) -> Option<DigitsPattern> {
 fn match_fixed_suffixes(id: &u64) -> Option<DigitsPattern> {
     let suffixes = HashMap::from([
         (69, basic_pattern("\u{264B}")),
-        (420, basic_pattern("\u{1F525}")),
+        (314, basic_pattern("\u{1F9EE}")),
+        (420, basic_pattern("\u{1F343}")),
+        (666, basic_pattern("\u{1F608}")),
         (777, basic_pattern("\u{1F3B0}")),
         (911, basic_pattern("\u{2708}\u{FE0F}")),
         (1984, rare_pattern("\u{1F441}\u{FE0F}")),
+        (1337, rare_pattern("\u{1F976}")),
     ]);
 
     return suffixes.iter()
