@@ -27,7 +27,7 @@ impl EventHandler for DubsBot {
         }
 
         if !matched_patterns.is_empty() {
-            if let Err(reason) = message.react(&context.http, '🐣').await {
+            if let Err(reason) = message.react(&context.http, '🌸').await {
                 println!("Error adding the default reaction: {}", reason);
                 return;
             }
