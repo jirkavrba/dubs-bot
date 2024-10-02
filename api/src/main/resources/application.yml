@@ -23,6 +23,8 @@ flyway:
   datasources:
     default:
       enabled: true
+      locations:
+        - classpath:migrations
 
 jpa:
   default:
