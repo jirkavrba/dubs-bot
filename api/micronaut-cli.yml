@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: dev.vrba.dubs
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle_kotlin
+features: [app-name, data, data-jpa, flyway, graalvm, gradle, http-client-test, java, java-application, jdbc-hikari, junit, logback, lombok, management, micrometer, micrometer-prometheus, micronaut-aot, micronaut-build, micronaut-http-validation, netty-server, postgres, readme, security, security-annotations, serialization-jackson, shade, static-resources, test-resources, yaml, yaml-build]
