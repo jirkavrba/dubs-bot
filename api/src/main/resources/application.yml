@@ -1,6 +1,7 @@
 micronaut:
   application:
     name: dubs-bot-api
+
   metrics:
     enabled: true
     export:
@@ -8,15 +9,21 @@ micronaut:
         enabled: true
         descriptions: true
         step: PT1M
+
 datasources:
   default:
     driver-class-name: org.postgresql.Driver
     db-type: postgres
     dialect: POSTGRES
+    url: jdbc:postgresql://${DATABASE_URL:`localhost:5432/dubs`}
+    username: ${DATABASE_USERNAME:dubs}
+    password: ${DATABASE_PASSWORD:dubs}
+
 flyway:
   datasources:
     default:
       enabled: true
+
 jpa:
   default:
     properties:
