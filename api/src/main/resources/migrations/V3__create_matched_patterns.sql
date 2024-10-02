@@ -4,7 +4,6 @@ create table if not exists matched_patterns
     pattern_id varchar(32) not null,
     channel_id varchar(32) not null,
     user_id    varchar(32) not null,
-    count      bigint default 0,
 
     constraint fk_matched_patterns_pattern_id foreign key (pattern_id) references patterns (id),
     constraint fk_matched_patterns_channel_id foreign key (channel_id) references channels (id),
