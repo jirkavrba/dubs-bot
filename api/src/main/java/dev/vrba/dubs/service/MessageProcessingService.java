@@ -51,9 +51,9 @@ public class MessageProcessingService {
                             0L,
                             channelEntity.getId(),
                             userEntity.getId(),
-                            pattern.name(),
-                            pattern.points(),
-                            pattern.rare()
+                            pattern.getName(),
+                            pattern.getPoints(),
+                            pattern.isRare()
                     ))
                     .toList();
 

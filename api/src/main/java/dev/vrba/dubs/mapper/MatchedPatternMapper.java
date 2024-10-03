@@ -17,12 +17,18 @@ public class MatchedPatternMapper {
 
     @NonNull
     public List<MatchedPatternDto> mapMatchedPatternsToDto(final @NonNull List<Pattern> patterns) {
-        return patterns.stream().map(this::mapMatchedPatternToDto).toList();
+        return patterns.stream()
+                .map(this::mapMatchedPatternToDto)
+                .toList();
 
     }
 
     @NonNull
     public MatchedPatternDto mapMatchedPatternToDto(final @NonNull Pattern pattern) {
-        return new MatchedPatternDto(pattern.name(), pattern.emoji(), pattern.rare());
+        return new MatchedPatternDto(
+                pattern.getName(),
+                pattern.getEmoji(),
+                pattern.isRare()
+        );
     }
 }

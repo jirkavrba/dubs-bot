@@ -2,10 +2,16 @@ package dev.vrba.dubs.domain;
 
 import io.micronaut.core.annotation.NonNull;
 
-public record Pattern(
-        @NonNull String name,
-        @NonNull String emoji,
-        int points,
-        boolean rare
-) {
+public interface Pattern {
+    @NonNull
+    String getName();
+
+    @NonNull
+    String getEmoji();
+
+    long getPoints();
+
+    boolean isRare();
+
+    boolean matches(@NonNull String id);
 }
