@@ -7,9 +7,11 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.With;
 
 import java.math.BigInteger;
 
+@With
 @Getter
 @Entity(name = "users")
 @NoArgsConstructor
