@@ -1,10 +1,7 @@
 package dev.vrba.dubs.domain;
 
 import io.micronaut.core.annotation.NonNull;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +15,9 @@ import lombok.experimental.FieldNameConstants;
 public class MatchedPattern {
     @Id
     @NonNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false, insertable = false)
-    private long id = 0;
+    private Long id = null;
 
     @NonNull
     @Column(name = "channel_id", nullable = false)

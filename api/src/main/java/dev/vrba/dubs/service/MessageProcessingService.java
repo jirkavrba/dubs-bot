@@ -48,7 +48,7 @@ public class MessageProcessingService {
         if (!patterns.isEmpty()) {
             final List<MatchedPattern> mappedPatterns = patterns.stream()
                     .map(pattern -> new MatchedPattern(
-                            0L,
+                            null,
                             channelEntity.getId(),
                             userEntity.getId(),
                             pattern.getName(),

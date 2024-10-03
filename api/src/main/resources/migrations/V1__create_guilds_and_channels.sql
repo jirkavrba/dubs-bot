@@ -11,7 +11,7 @@ create table if not exists channels
     name     varchar(128) not null,
     guild_id varchar(32)  not null,
 
-    constraint fk_channels_guild_id foreign key (guild_id) references channels (id) on delete cascade
+    constraint fk_channels_guild_id foreign key (guild_id) references guilds (id) on delete cascade
 );
 
 create index on channels (guild_id);

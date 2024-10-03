@@ -1,11 +1,14 @@
 package dev.vrba.dubs.domain;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.data.annotation.sql.JoinColumn;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.With;
 
+@With
 @Getter
 @Entity(name = "channels")
 @NoArgsConstructor

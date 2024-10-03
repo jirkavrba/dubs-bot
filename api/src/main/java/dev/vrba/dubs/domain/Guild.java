@@ -5,9 +5,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.With;
 
 import java.util.Set;
 
+@With
 @Getter
 @Entity(name = "guilds")
 @NoArgsConstructor
