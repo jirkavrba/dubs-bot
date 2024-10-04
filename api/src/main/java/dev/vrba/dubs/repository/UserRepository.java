@@ -1,9 +1,10 @@
 package dev.vrba.dubs.repository;
 
 import dev.vrba.dubs.domain.User;
-import io.micronaut.data.annotation.Repository;
+import io.micronaut.data.jdbc.annotation.JdbcRepository;
+import io.micronaut.data.model.query.builder.sql.Dialect;
 import io.micronaut.data.repository.CrudRepository;
 
-@Repository
+@JdbcRepository(dialect = Dialect.POSTGRES)
 public interface UserRepository extends CrudRepository<User, String> {
 }

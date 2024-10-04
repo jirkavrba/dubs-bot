@@ -1,34 +1,28 @@
 package dev.vrba.dubs.domain;
 
 import io.micronaut.core.annotation.NonNull;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.With;
-
-import java.util.Set;
+import io.micronaut.data.annotation.Id;
+import io.micronaut.data.annotation.MappedEntity;
+import io.micronaut.data.annotation.MappedProperty;
+import lombok.*;
 
 @With
 @Getter
-@Entity(name = "guilds")
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedEntity("guilds")
 public class Guild {
     @Id
     @NonNull
-    @Column(name = "id", nullable = false, updatable = false)
+    @MappedProperty("id")
     private String id;
 
     @NonNull
-    @Column(name = "name", nullable = false)
+    @MappedProperty("name")
     private String name;
 
     @NonNull
-    @Column(name = "icon_url", nullable = false)
+    @MappedProperty("icon_url")
     private String icon;
-
-    @NonNull
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "guild")
-    private Set<Channel> channels;
 }

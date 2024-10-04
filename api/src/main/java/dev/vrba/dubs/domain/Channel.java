@@ -1,29 +1,28 @@
 package dev.vrba.dubs.domain;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.data.annotation.Id;
+import io.micronaut.data.annotation.MappedEntity;
+import io.micronaut.data.annotation.MappedProperty;
 import io.micronaut.data.annotation.sql.JoinColumn;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.With;
+import lombok.*;
 
 @With
 @Getter
-@Entity(name = "channels")
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedEntity("channels")
 public class Channel {
     @Id
     @NonNull
-    @Column(name = "id", nullable = false)
+    @MappedProperty("id")
     private String id;
 
     @NonNull
-    @Column(name = "name", nullable = false)
+    @MappedProperty("name")
     private String name;
 
     @JoinColumn(name = "guild_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Guild guild;
 }

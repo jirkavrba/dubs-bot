@@ -1,41 +1,44 @@
 package dev.vrba.dubs.domain;
 
 import io.micronaut.core.annotation.NonNull;
-import jakarta.persistence.*;
+import io.micronaut.data.annotation.GeneratedValue;
+import io.micronaut.data.annotation.Id;
+import io.micronaut.data.annotation.MappedEntity;
+import io.micronaut.data.annotation.MappedProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldNameConstants;
+import lombok.Setter;
 
 @Getter
-@Entity(name = "matched_patterns")
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedEntity("matched_patterns")
 public class MatchedPattern {
     @Id
     @NonNull
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false, insertable = false)
+    @GeneratedValue()
+    @MappedProperty("id")
     private Long id = null;
 
     @NonNull
-    @Column(name = "channel_id", nullable = false)
+    @MappedProperty("channel_id")
     private String channel;
 
     @NonNull
-    @Column(name = "user_id", nullable = false)
+    @MappedProperty("user_id")
     private String user;
 
     @NonNull
-    @Column(name = "pattern_name", nullable = false)
+    @MappedProperty("pattern_name")
     private String patternName;
 
     @NonNull
-    @Column(name = "pattern_points", nullable = false)
+    @MappedProperty("pattern_points")
     private long patternPoints;
 
     @NonNull
-    @Column(name = "pattern_is_rare", nullable = false)
+    @MappedProperty("pattern_is_rare")
     private boolean patternIsRare;
 }

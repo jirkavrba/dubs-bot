@@ -1,58 +1,52 @@
 package dev.vrba.dubs.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Size;
+import io.micronaut.data.annotation.Id;
+import io.micronaut.data.annotation.MappedEntity;
+import io.micronaut.data.annotation.MappedProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigInteger;
 
 @Getter
-@Entity(name = "matches")
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedEntity("matches")
 public class Match {
     @Id
-    @Column(name = "row_id")
+    @MappedProperty("row_id")
     private Integer id;
 
-    @Size(max = 64)
-    @Column(name = "pattern_name", length = 64)
+    @MappedProperty("pattern_name")
     private String patternName;
 
-    @Column(name = "pattern_points")
+    @MappedProperty("pattern_points")
     private Long patternPoints;
 
-    @Column(name = "pattern_is_rare")
+    @MappedProperty("pattern_is_rare")
     private Boolean patternIsRare;
 
-    @Size(max = 32)
-    @Column(name = "user_id", length = 32)
+    @MappedProperty("user_id")
     private String userId;
 
-    @Size(max = 128)
-    @Column(name = "user_name", length = 128)
+    @MappedProperty("user_name")
     private String userName;
 
-    @Size(max = 32)
-    @Column(name = "channel_id", length = 32)
+    @MappedProperty("channel_id")
     private String channelId;
 
-    @Size(max = 128)
-    @Column(name = "channel_name", length = 128)
+    @MappedProperty("channel_name")
     private String channelName;
 
-    @Size(max = 32)
-    @Column(name = "guild_id", length = 32)
+    @MappedProperty("guild_id")
     private String guildId;
 
-    @Size(max = 128)
-    @Column(name = "guild_name", length = 128)
+    @MappedProperty("guild_name")
     private String guildName;
 
-    @Column(name = "count")
+    @MappedProperty("count")
     private BigInteger count;
 }

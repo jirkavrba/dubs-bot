@@ -6,7 +6,6 @@ import io.micronaut.core.annotation.NonNull;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 
-import java.util.HashSet;
 import java.util.Optional;
 
 @Singleton
@@ -25,6 +24,6 @@ public class GuildService {
         final Optional<Guild> existingGuild = repository.findById(id);
         return existingGuild
                 .map(entity -> repository.update(entity.withName(name).withIcon(icon)))
-                .orElseGet(() -> repository.save(new Guild(id, name, icon, new HashSet<>())));
+                .orElseGet(() -> repository.save(new Guild(id, name, icon)));
     }
 }

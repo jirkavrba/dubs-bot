@@ -1,36 +1,34 @@
 package dev.vrba.dubs.domain;
 
 import io.micronaut.core.annotation.NonNull;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.With;
+import io.micronaut.data.annotation.Id;
+import io.micronaut.data.annotation.MappedEntity;
+import io.micronaut.data.annotation.MappedProperty;
+import lombok.*;
 
 import java.math.BigInteger;
 
 @With
 @Getter
-@Entity(name = "users")
+@Setter
+@MappedEntity("users")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
     @NonNull
-    @Column(name = "id", nullable = false, updatable = false)
+    @MappedProperty("id")
     private String id;
 
     @NonNull
-    @Column(name = "name", nullable = false)
+    @MappedProperty("name")
     private String name;
 
     @NonNull
-    @Column(name = "avatar_url", nullable = false)
+    @MappedProperty("avatar_url")
     private String avatar;
 
     @NonNull
-    @Column(name = "points", nullable = false)
+    @MappedProperty("points")
     private BigInteger points;
 }
