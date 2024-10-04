@@ -4,12 +4,14 @@ import dev.vrba.dubs.domain.*;
 import dev.vrba.dubs.dto.ChannelDto;
 import dev.vrba.dubs.dto.GuildDto;
 import dev.vrba.dubs.dto.UserDto;
+import dev.vrba.dubs.metrics.ProcessedMessagesMetric;
 import dev.vrba.dubs.repository.MatchedPatternRepository;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.transaction.annotation.Transactional;
 import jakarta.inject.Singleton;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,6 +35,9 @@ public class MessageProcessingService {
     private final PatternMatchingService patternMatchingService;
 
     @NonNull
+    private final ProcessedMessagesMetric metric;
+
+    @NonNull
     @Transactional
     public List<Pattern> processMessage(
             final @NonNull String message,
@@ -40,6 +45,8 @@ public class MessageProcessingService {
             final @NonNull ChannelDto channel,
             final @NonNull GuildDto guild
     ) {
+        metric.record(user.id(), channel.id(), guild.id());
+
         final Guild guildEntity = guildService.upsertGuild(guild.id(), guild.name(), guild.icon());
         final User userEntity = userService.upsertUser(user.id(), user.name(), user.avatar());
         final Channel channelEntity = channelService.upsertChannel(channel.id(), channel.name(), guildEntity);
@@ -57,6 +64,12 @@ public class MessageProcessingService {
                     ))
                     .toList();
 
+            final BigInteger totalPoints = patterns.stream()
+                    .map(Pattern::getPoints)
+                    .map(BigInteger::valueOf)
+                    .reduce(BigInteger.ZERO, BigInteger::add);
+
+            userService.incrementUserPoints(userEntity, totalPoints);
             matchedPatternRepository.saveAll(mappedPatterns);
 
             return patterns;

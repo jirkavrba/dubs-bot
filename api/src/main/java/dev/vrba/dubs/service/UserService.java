@@ -27,4 +27,12 @@ public class UserService {
                 .map(entity -> repository.update(entity.withName(name).withAvatar(avatar)))
                 .orElseGet(() -> repository.save(new User(id, name, avatar, BigInteger.ZERO)));
     }
+
+    @NonNull
+    public User incrementUserPoints(
+            @NonNull User user,
+            @NonNull BigInteger points
+    ) {
+        return repository.update(user.withPoints(user.getPoints().add(points)));
+    }
 }
