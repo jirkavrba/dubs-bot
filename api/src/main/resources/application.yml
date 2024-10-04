@@ -8,11 +8,20 @@ micronaut:
 
   metrics:
     enabled: true
+    binders:
+      jdbc.enabled: false
+      jvm.enabled: false
+      logback.enabled: false
+      processor.enabled: false
+      files.enabled: false
+      uptime.enabled: false
+      web.enabled: false
+      executor.enabled: false
     export:
       prometheus:
         enabled: true
-        descriptions: true
-        step: PT1M
+        descriptions: false
+        step: PT60S
 
   security:
     basic-auth:

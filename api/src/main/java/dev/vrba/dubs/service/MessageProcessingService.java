@@ -4,6 +4,7 @@ import dev.vrba.dubs.domain.*;
 import dev.vrba.dubs.dto.ChannelDto;
 import dev.vrba.dubs.dto.GuildDto;
 import dev.vrba.dubs.dto.UserDto;
+import dev.vrba.dubs.metrics.MatchedPatternsMetric;
 import dev.vrba.dubs.metrics.ProcessedMessagesMetric;
 import dev.vrba.dubs.repository.MatchedPatternRepository;
 import io.micronaut.core.annotation.NonNull;
@@ -35,42 +36,37 @@ public class MessageProcessingService {
     private final PatternMatchingService patternMatchingService;
 
     @NonNull
-    private final ProcessedMessagesMetric metric;
+    private final ProcessedMessagesMetric processedMessageMetric;
+
+    @NonNull
+    private final MatchedPatternsMetric matchedPatternsMetric;
 
     @NonNull
     @Transactional
-    public List<Pattern> processMessage(
-            final @NonNull String message,
-            final @NonNull UserDto user,
-            final @NonNull ChannelDto channel,
-            final @NonNull GuildDto guild
-    ) {
-        metric.record(user.id(), channel.id(), guild.id());
-
+    public List<Pattern> processMessage(final @NonNull String message, final @NonNull UserDto user, final @NonNull ChannelDto channel, final @NonNull GuildDto guild) {
         final Guild guildEntity = guildService.upsertGuild(guild.id(), guild.name(), guild.icon());
         final User userEntity = userService.upsertUser(user.id(), user.name(), user.avatar());
         final Channel channelEntity = channelService.upsertChannel(channel.id(), channel.name(), guildEntity);
         final List<Pattern> patterns = patternMatchingService.matchMessagePatterns(message);
 
-        if (!patterns.isEmpty()) {
-            final List<MatchedPattern> mappedPatterns = patterns.stream()
-                    .map(pattern -> new MatchedPattern(
-                            null,
-                            channelEntity.getId(),
-                            userEntity.getId(),
-                            pattern.getName(),
-                            pattern.getPoints(),
-                            pattern.isRare()
-                    ))
-                    .toList();
+        processedMessageMetric.record(userEntity, channelEntity, guildEntity);
 
-            final BigInteger totalPoints = patterns.stream()
-                    .map(Pattern::getPoints)
-                    .map(BigInteger::valueOf)
-                    .reduce(BigInteger.ZERO, BigInteger::add);
+        if (!patterns.isEmpty()) {
+            final List<MatchedPattern> mappedPatterns = patterns.stream().map(pattern -> new MatchedPattern(null, channelEntity.getId(), userEntity.getId(), pattern.getName(), pattern.getPoints(), pattern.isRare())).toList();
+
+            final BigInteger totalPoints = patterns.stream().map(Pattern::getPoints).map(BigInteger::valueOf).reduce(BigInteger.ZERO, BigInteger::add);
 
             userService.incrementUserPoints(userEntity, totalPoints);
             matchedPatternRepository.saveAll(mappedPatterns);
+
+            patterns.forEach(pattern -> {
+                matchedPatternsMetric.record(
+                        userEntity,
+                        channelEntity,
+                        guildEntity,
+                        pattern
+                );
+            });
 
             return patterns;
         }
