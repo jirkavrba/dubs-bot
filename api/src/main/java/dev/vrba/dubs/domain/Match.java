@@ -49,4 +49,7 @@ public class Match {
 
     @MappedProperty("count")
     private BigInteger count;
+
+    @MappedProperty("points")
+    private BigInteger points;
 }

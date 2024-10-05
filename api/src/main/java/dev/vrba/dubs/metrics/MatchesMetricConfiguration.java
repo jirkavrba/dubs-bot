@@ -51,7 +51,9 @@ public class MatchesMetricConfiguration {
                         Tag.of("guild.name", match.getGuildName()),
                         Tag.of("pattern.name", match.getPatternName()),
                         Tag.of("pattern.rare", match.getPatternIsRare().toString()),
-                        Tag.of("pattern.points", match.getPatternPoints().toString())
+                        Tag.of("pattern.points", match.getPatternPoints().toString()),
+                        Tag.of("points", match.getPoints().toString())
+
                 ),
                 match.getCount()
         );
