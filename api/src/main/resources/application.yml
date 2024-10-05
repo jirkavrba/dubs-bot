@@ -2,6 +2,9 @@ micronaut:
   application:
     name: dubs-bot-api
 
+  server:
+    port: ${PORT:8080}
+
   serde:
     serialization:
       inclusion: always
@@ -59,8 +62,6 @@ flyway:
   datasources:
     default:
       enabled: true
-      locations:
-        - classpath:migrations
 
 jpa:
   default:

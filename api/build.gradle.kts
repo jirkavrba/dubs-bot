@@ -1,3 +1,5 @@
+import io.micronaut.gradle.docker.NativeImageDockerfile
+
 plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.4.2"
@@ -39,17 +41,18 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers")
 }
 
-
 application {
     mainClass = "dev.vrba.dubs.Application"
 }
+
 java {
     sourceCompatibility = JavaVersion.toVersion("21")
     targetCompatibility = JavaVersion.toVersion("21")
 }
 
-
-graalvmNative.toolchainDetection = false
+graalvmNative {
+    toolchainDetection = false
+}
 
 micronaut {
     runtime("netty")
@@ -72,9 +75,7 @@ micronaut {
     }
 }
 
-
-tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
+tasks.named<NativeImageDockerfile>("dockerfileNative") {
     jdkVersion = "21"
 }
-
 
