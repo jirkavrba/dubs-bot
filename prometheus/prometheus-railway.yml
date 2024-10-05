@@ -4,7 +4,7 @@ scrape_configs:
     static_configs:
       - targets:
         - "api.railway.internal:8080"
-    scrape_interval: 30s
+    scrape_interval: 15m
     scrape_timeout: 5s
     body_size_limit: 10MB
     sample_limit: 1000
