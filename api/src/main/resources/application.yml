@@ -26,28 +26,10 @@ micronaut:
         descriptions: false
         step: PT60S
 
-  security:
-    basic-auth:
-      enabled: true
-    intercept-url-map:
-      - pattern: "/api/v1/bot/**"
-        access:
-          - ROLE_BOT
-
-      - pattern: "/prometheus"
-        http-method: "GET"
-        access:
-          - "isAnonymous()"
-
   endpoints:
     prometheus:
       enabled: true
       sensitive: false
-
-credentials:
-  bot-user:
-    username: ${BOT_USER_USERNAME:bot}
-    password: ${BOT_USER_PASSWORD:bot}
 
 datasources:
   default:

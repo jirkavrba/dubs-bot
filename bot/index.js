@@ -13,8 +13,6 @@ const getEnvVariable = (variable) => {
 
 const DISCORD_TOKEN = getEnvVariable("DISCORD_TOKEN");
 const API_ENDPOINT = getEnvVariable("API_ENDPOINT");
-const API_USERNAME = getEnvVariable("API_USERNAME");
-const API_PASSWORD = getEnvVariable("API_PASSWORD");
 
 const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]});
 
