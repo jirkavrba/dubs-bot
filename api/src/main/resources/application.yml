@@ -32,6 +32,11 @@ micronaut:
 
     intercept-url-map:
       - pattern: "/**"
+        http-method: "POST"
+        access:
+          - "isAnonymous()"
+
+      - pattern: "/**"
         http-method: "GET"
         access:
           - "isAnonymous()"
