@@ -27,26 +27,28 @@ client.on("messageCreate", (event) => {
         return;
     }
 
+    const request = {
+        message_id: event.id.toString(),
+        user: {
+            id: event.author.id.toString(),
+            name: event.author.username,
+            avatar_url: event.author.avatarURL()
+        },
+        channel: {
+            id: event.channelId.toString(),
+            name: event.channel.name,
+        },
+        guild: {
+            id: event.guildId.toString(),
+            name: event.guild.name,
+            icon_url: event.guild.iconURL()
+        }
+    };
+
     fetch(API_ENDPOINT, {
         method: "POST",
         credentials: "omit",
-        body: JSON.stringify({
-            message_id: event.id.toString(),
-            user: {
-                id: event.author.id.toString(),
-                name: event.author.username,
-                avatar_url: event.author.avatarURL()
-            },
-            channel: {
-                id: event.channelId.toString(),
-                name: event.channel.name,
-            },
-            guild: {
-                id: event.guildId.toString(),
-                name: event.guild.name,
-                icon_url: event.guild.iconURL()
-            }
-        }),
+        body: JSON.stringify(request),
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
@@ -55,6 +57,8 @@ client.on("messageCreate", (event) => {
     })
         .then(response => response.json())
         .then(async response => {
+            console.log({request, response});
+
             if (!response.matches) {
                 return;
             }
