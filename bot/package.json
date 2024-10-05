@@ -4,8 +4,9 @@
   "description": "A bot for detecting accidental dubs/trips/quads and other patterns among your Discord messages.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/jirkavrba/dubs-bot.git"
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jirkavrba/dubs-bot/issues"
   },
-  "homepage": "https://github.com/jirkavrba/dubs-bot#readme"
+  "homepage": "https://github.com/jirkavrba/dubs-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.16.3"
+  }
 }
