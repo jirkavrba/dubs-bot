@@ -14,20 +14,11 @@ import java.math.BigInteger;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedEntity("matches")
-public class Match {
+@MappedEntity("score")
+public class Score {
     @Id
     @MappedProperty("row_id")
     private Integer id;
-
-    @MappedProperty("pattern_name")
-    private String patternName;
-
-    @MappedProperty("pattern_points")
-    private Long patternPoints;
-
-    @MappedProperty("pattern_is_rare")
-    private Boolean patternIsRare;
 
     @MappedProperty("user_id")
     private String userId;
@@ -47,6 +38,6 @@ public class Match {
     @MappedProperty("guild_name")
     private String guildName;
 
-    @MappedProperty("count")
-    private BigInteger count;
+    @MappedProperty("score")
+    private BigInteger score;
 }

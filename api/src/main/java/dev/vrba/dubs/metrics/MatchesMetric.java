@@ -13,7 +13,7 @@ import jakarta.inject.Singleton;
 import java.util.stream.Collectors;
 
 @Singleton
-public class MatchesMetricConfiguration {
+public class MatchesMetric {
 
     @NonNull
     private final MultiGauge gauge;
@@ -21,7 +21,7 @@ public class MatchesMetricConfiguration {
     @NonNull
     private final MatchRepository repository;
 
-    public MatchesMetricConfiguration(
+    public MatchesMetric(
             final @NonNull MeterRegistry registry,
             final @NonNull MatchRepository repository
     ) {
@@ -51,9 +51,7 @@ public class MatchesMetricConfiguration {
                         Tag.of("guild.name", match.getGuildName()),
                         Tag.of("pattern.name", match.getPatternName()),
                         Tag.of("pattern.rare", match.getPatternIsRare().toString()),
-                        Tag.of("pattern.points", match.getPatternPoints().toString()),
-                        Tag.of("points", match.getPoints().toString())
-
+                        Tag.of("pattern.points", match.getPatternPoints().toString())
                 ),
                 match.getCount()
         );
