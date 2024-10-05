@@ -26,6 +26,16 @@ micronaut:
         descriptions: false
         step: PT60S
 
+  security:
+    basic-auth:
+      enabled: true
+
+    intercept-url-map:
+      - pattern: "/**"
+        http-method: "GET"
+        access:
+          - "isAnonymous()"
+
   endpoints:
     prometheus:
       enabled: true
