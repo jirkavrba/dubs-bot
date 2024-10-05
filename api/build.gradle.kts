@@ -77,7 +77,7 @@ micronaut {
 }
 
 tasks.withType<DockerBuildImage> {
-    images = setOf("ghcr.io/jirkavrba/dubs-bot")
+    images = setOf("ghcr.io/jirkavrba/dubs-bot/api")
 }
 
 tasks.named<NativeImageDockerfile>("dockerfileNative") {
