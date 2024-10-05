@@ -3,7 +3,7 @@ scrape_configs:
     honor_labels: true
     static_configs:
       - targets:
-        - "api.railway.internal"
+        - "api.railway.internal:8080"
     scrape_interval: 30s
     scrape_timeout: 5s
     body_size_limit: 10MB
