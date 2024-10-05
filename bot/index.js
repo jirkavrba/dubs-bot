@@ -50,7 +50,6 @@ client.on("messageCreate", (event) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization": "Basic " + btoa(`${API_USERNAME}:${API_PASSWORD}`)
         }
     })
         .then(response => response.json())
