@@ -1,3 +1,4 @@
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import io.micronaut.gradle.docker.NativeImageDockerfile
 
 plugins {
@@ -73,6 +74,10 @@ micronaut {
         optimizeNetty = true
         replaceLogbackXml = true
     }
+}
+
+tasks.withType<DockerBuildImage> {
+    images = setOf("ghcr.io/jirkavrba/dubs-bot")
 }
 
 tasks.named<NativeImageDockerfile>("dockerfileNative") {
