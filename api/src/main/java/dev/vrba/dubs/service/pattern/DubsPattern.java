@@ -12,7 +12,7 @@ public class DubsPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":two:";
+        return "2\uFE0F\u20E3";
     }
 
     @Override

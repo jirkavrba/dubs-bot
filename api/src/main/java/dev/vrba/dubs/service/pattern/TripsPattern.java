@@ -12,7 +12,7 @@ public class TripsPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":three:";
+        return "3\uFE0F\u20E3";
     }
 
     @Override

@@ -12,7 +12,7 @@ public class NonasPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":nine:";
+        return "9\uFE0F\u20E3";
     }
 
     @Override

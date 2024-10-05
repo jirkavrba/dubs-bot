@@ -12,7 +12,7 @@ public class PentsPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":five:";
+        return "5\uFE0F\u20E3";
     }
 
     @Override

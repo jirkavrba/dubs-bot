@@ -12,7 +12,7 @@ public class SeptsPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":seven:";
+        return "7\uFE0F\u20E3";
     }
 
     @Override

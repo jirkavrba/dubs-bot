@@ -12,7 +12,7 @@ public class QuadsPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":four:";
+        return "4\uFE0F\u20E3";
     }
 
     @Override

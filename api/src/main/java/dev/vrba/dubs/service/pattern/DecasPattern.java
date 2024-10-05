@@ -12,7 +12,7 @@ public class DecasPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":ten:";
+        return "\uD83D\uDD1F";
     }
 
     @Override

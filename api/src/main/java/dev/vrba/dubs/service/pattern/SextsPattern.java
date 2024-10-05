@@ -12,7 +12,7 @@ public class SextsPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":six:";
+        return "6\uFE0F\u20E3";
     }
 
     @Override

@@ -15,7 +15,7 @@ public class PrimesPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":nerd:";
+        return "\uD83E\uDD13";
     }
 
     @Override

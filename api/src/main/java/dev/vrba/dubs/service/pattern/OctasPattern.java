@@ -12,7 +12,7 @@ public class OctasPattern implements Pattern {
 
     @Override
     public String getEmoji() {
-        return ":eight:";
+        return "8\uFE0F\u20E3";
     }
 
     @Override
